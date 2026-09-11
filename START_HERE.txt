@@ -1,0 +1,72 @@
+QUIZSPARK - MYSQL VERSION
+==========================
+
+IMPORTANT: Supabase has been removed. This version uses:
+React/Vite -> Node.js/Express -> MySQL
+
+STEP 1 - DATABASE
+-----------------
+You already created the quizspark database and 8 tables.
+If needed, run mysql_schema.sql in MySQL.
+
+STEP 2 - MYSQL PASSWORD
+-----------------------
+Open:
+server\.env.example
+
+Copy it to:
+server\.env
+
+Then change:
+DB_PASSWORD=YOUR_MYSQL_ROOT_PASSWORD
+
+Example:
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=123456
+DB_NAME=quizspark
+PORT=4000
+
+Use YOUR actual MySQL root password. Do NOT put this password in the React .env file.
+
+STEP 3 - INSTALL BACKEND
+------------------------
+Open VS Code terminal:
+cd server
+npm install
+npm start
+
+Keep this terminal running.
+You should see:
+QuizSpark MySQL API running on http://localhost:4000
+
+STEP 4 - INSTALL FRONTEND
+-------------------------
+Open a SECOND VS Code terminal in the project root:
+npm install
+npm run dev
+
+Open the URL shown by Vite.
+
+STEP 5 - TEST LIVE QUIZ
+-----------------------
+1. Login as teacher.
+2. Create a quiz.
+3. Publish the quiz.
+4. Click Live Lobby.
+5. Open the same Vite URL on another browser/device.
+6. Enter the quiz code.
+7. Enter the student's name and join.
+8. The student is saved in MySQL table live_participants.
+9. The teacher lobby checks MySQL every second, so the student should appear.
+10. Teacher clicks Start quiz.
+11. Student automatically leaves the lobby and opens the quiz.
+
+IF SERVER DOES NOT START
+------------------------
+Check server/.env, especially DB_PASSWORD.
+Also make sure MySQL Server is running in Windows Services or MySQL Installer.
+
+DO NOT USE THE OLD SUPABASE FILES.
+This project no longer needs a Supabase URL or Supabase anon key.
