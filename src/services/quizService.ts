@@ -1,10 +1,9 @@
 import type { Quiz, QuizAttempt, LeaderboardEntry, LiveQuizParticipant, LiveQuizSession } from '../types/quiz';
+import { apiUrl } from './apiConfig';
 
 const LOCAL_STORAGE_KEY = 'kahoot_quiz_platform_quizzes';
 const LOCAL_STORAGE_ATTEMPTS_KEY = 'kahoot_quiz_platform_attempts';
 const DEMO_QUIZ_IDS = new Set(['quiz-starter-science', 'quiz-starter-general', 'quiz-science-101', 'quiz-world-history']);
-const API_BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
-
 export const generateQuizCode = (): string => {
   const part1 = Math.floor(100 + Math.random() * 900);
   const part2 = Math.floor(100 + Math.random() * 900);
@@ -12,7 +11,7 @@ export const generateQuizCode = (): string => {
 };
 
 const api = async <T>(path: string, options?: RequestInit): Promise<T> => {
-  const response = await fetch(`${API_BASE_URL}/api${path}`, {
+  const response = await fetch(apiUrl(path), {
     ...options,
     headers: { 'Content-Type': 'application/json', ...(options?.headers || {}) }
   });

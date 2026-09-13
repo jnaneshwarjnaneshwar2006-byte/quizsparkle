@@ -5,11 +5,11 @@ QuizSpark uses a browser frontend, an Express/MySQL API, and MySQL kept entirely
 ## Local development
 
 1. Run `database_schema.sql` in MySQL.
-2. Copy `server/.env.example` to `server/.env` and set the local database values plus `FRONTEND_URL`.
+2. Copy `server/.env.example` to `server/.env` and set the local database values. For direct browser-to-API development, set `FRONTEND_URL=http://localhost:5173`; the default Vite proxy does not require CORS.
 3. Start the API from `server`: `npm install` then `npm start`.
 4. Start the frontend from the project root: `npm install` then `npm run dev`.
 
-The Vite development proxy uses `VITE_API_URL` when supplied, otherwise it targets the local API. Never put database credentials in a frontend env file.
+The Vite development proxy uses `VITE_API_URL` when supplied, otherwise it targets the local API on port `5000`. Never put database credentials in a frontend env file.
 
 ## Production environment
 
@@ -22,14 +22,17 @@ VITE_API_URL=https://YOUR-BACKEND-DOMAIN
 Backend hosting dashboard:
 
 ```env
-DB_HOST=YOUR_MANAGED_MYSQL_HOST
+DB_HOST=your-managed-mysql-host
 DB_PORT=3306
-DB_USER=YOUR_MYSQL_USER
-DB_PASSWORD=YOUR_MYSQL_PASSWORD
+DB_USER=root
+DB_PASSWORD=root1234
 DB_NAME=quizspark
+PORT=5000
 FRONTEND_URL=https://YOUR-FRONTEND-DOMAIN
 NODE_ENV=production
 ```
+
+`FRONTEND_URL` may contain multiple comma-separated frontend origins when needed. Do not use a local or LAN address for production values. The frontend `VITE_API_URL` must be the public HTTPS URL of the backend, and the backend `DB_HOST` must be the hostname supplied by the managed MySQL provider.
 
 The hosting provider supplies `PORT`; the API listens on it and binds to all interfaces. Do not commit `.env` files or database credentials.
 

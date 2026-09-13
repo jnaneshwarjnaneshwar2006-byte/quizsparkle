@@ -1,4 +1,5 @@
 import type { UserProfile, Role } from '../types/quiz';
+import { apiUrl } from './apiConfig';
 
 const AUTH_STORAGE_KEY = 'kahoot_quiz_platform_user';
 const TEACHER_EMAIL = 'aditya2003@gmail.com';
@@ -18,7 +19,7 @@ export const authService = {
       return { user: null, error: 'Invalid teacher email or password.' };
     }
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(apiUrl('/auth/login'), {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: cleanEmail, password: pass, role, name: cleanEmail.split('@')[0] })
       });

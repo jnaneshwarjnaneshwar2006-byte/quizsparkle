@@ -26,7 +26,7 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=123456
 DB_NAME=quizspark
-PORT=4000
+PORT=5000
 
 Use YOUR actual MySQL root password. Do NOT put this password in the React .env file.
 
@@ -39,7 +39,7 @@ npm start
 
 Keep this terminal running.
 You should see:
-QuizSpark MySQL API running on http://localhost:4000
+QuizSpark MySQL API listening on port 5000
 
 STEP 4 - INSTALL FRONTEND
 -------------------------
