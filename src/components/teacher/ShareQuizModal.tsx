@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import type { Quiz } from '../../types/quiz';
-import { Check, Copy, ExternalLink, QrCode, X } from 'lucide-react';
+
+type IconProps = { className?: string };
+const Icon = ({ className, children }: React.PropsWithChildren<IconProps>) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    {children}
+  </svg>
+);
+const Check = ({ className }: IconProps) => <Icon className={className}><path d="m5 12 4 4L19 6" /></Icon>;
+const Copy = ({ className }: IconProps) => <Icon className={className}><rect width="14" height="14" x="8" y="8" rx="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></Icon>;
+const ExternalLink = ({ className }: IconProps) => <Icon className={className}><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></Icon>;
+const QrCode = ({ className }: IconProps) => <Icon className={className}><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M16 16h2v2h-2zM20 20h1M16 21v-3M21 16h-3" /></Icon>;
+const X = ({ className }: IconProps) => <Icon className={className}><path d="M18 6 6 18M6 6l12 12" /></Icon>;
 
 interface ShareQuizModalProps {
   quiz: Quiz;
@@ -8,8 +19,8 @@ interface ShareQuizModalProps {
 }
 
 const getPublicJoinUrl = (code: string): string => {
-  const joinUrl = new URL(`/join/${encodeURIComponent(code)}`, window.location.origin);
-  return joinUrl.toString();
+  const baseUrl = "https://quizsparkle.onrender.com";
+  return `${baseUrl}/join/${encodeURIComponent(code)}`;
 };
 
 export const ShareQuizModal: React.FC<ShareQuizModalProps> = ({ quiz, onClose }) => {
