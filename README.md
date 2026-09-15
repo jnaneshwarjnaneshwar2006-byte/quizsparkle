@@ -45,7 +45,7 @@ The hosting provider supplies `PORT`; the API listens on it and binds to all int
 3. Create the MySQL database/schema using `database_schema.sql` on a managed MySQL provider that permits connections from Render. Add its host, port, user, password, and database name to the `quizspark-api` service.
 4. Set `FRONTEND_URL` on `quizspark-api` to the exact HTTPS URL of `quizspark-web`.
 5. Set `VITE_API_URL` on `quizspark-web` to the exact HTTPS URL of `quizspark-api`, then redeploy the static site.
-6. Add the SPA rewrite on the static site: source `/*`, destination `/index.html`, action **Rewrite**. This keeps `/join/ABC123` working when opened directly.
+6. The `render.yaml` Static Site configuration adds the SPA rewrite: source `/*`, destination `/index.html`, action **Rewrite**. If the static site already exists outside the Blueprint, add that same rewrite in its Render settings so `/join/ABC123` works when opened or refreshed directly.
 7. Confirm `https://YOUR-BACKEND-DOMAIN/api/health` returns `{ "ok": true }` before testing the frontend.
 
 The API build command is `npm ci` in `server`; its start command is `npm start`. The frontend build command is `npm ci && npm run build`, publishing `dist`.
